@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ennchan-search"
+version = "0.0.1"
+description = "Search module for the RAG using LangChain"
+readme = "README.md"
+authors = [
+    {name = "Nick Ecuacion", email = "nicololynsuecuacion@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pydantic>=2.0.0",
+    "beautifulsoup4>=4.12.0",
+    "requests>=2.28.0",
+    "brave-search>=0.1.8",
+    "lxml>=4.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ecinauce/ennchan-search01"
+"Bug Tracker" = "https://github.com/ecinauce/ennchan-search01/issues"
