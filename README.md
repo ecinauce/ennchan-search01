@@ -1,66 +1,57 @@
-# Ennchan RAG Proof of Concept
+# Ennchan Search Engine Module
 
-A locally hosted chatbot that answers questions using internet search results.
+A modular search engine component designed for RAG (Retrieval-Augmented Generation) systems.
 
 ## Project Overview
 
 ### What is this?
-This is a Q&A chatbot that receives user questions, searches the internet for answers, and provides summarized responses. The project aims to create a local, self-hosted chatbot solution that runs directly on your PC.
+This is a search engine module that handles web searching and content extraction. It's designed to be a component in RAG systems, providing efficient web content retrieval and processing capabilities.
 
 ### Why build it?
-Traditional cloud-based solutions like ChatGPT and DeepSeek often face usage limits and server congestion. This project provides a local alternative that maintains high-quality responses while giving users full control over the models and search capabilities.
+This module serves as a crucial component for RAG systems, handling the retrieval aspect by providing:
+- Flexible search engine integration
+- Robust content extraction
+- Efficient processing of web results
+- Clean integration interfaces for larger systems
 
 ## Features
 
 ### Core Functionality
-- Local-first architecture for independence from cloud services
-- Flexible Q&A chatbot interface
-- Pluggable model architecture supporting multiple LLMs
-- Configurable search engine integration
-
-### Query Capabilities
-Users can ask any type of question, with response quality depending on:
-- The loaded language model's capabilities
-- Search engine result quality
-- Available context window size
-- Retrieval strategy effectiveness
+- Configurable search engine integration (currently supports Brave Search)
+- Advanced content extraction from web pages
+- Parallel processing of search results
+- Error handling with retry mechanisms
 
 ### Technical Architecture
 
 #### Search and Retrieval Pipeline
 1. Query Processing
-   - User input is processed and optimized for search
-   - Query expansion techniques improve search relevance
+   - Clean query handling
+   - Search optimization
 
 2. Search Integration
-   - Configurable search engine API integration (currently supports Brave Search)
+   - Brave Search API integration
    - Robust error handling and retry mechanisms
-   - Asynchronous request handling for better performance
+   - Asynchronous request handling
 
-3. Information Retrieval
-   - Multiple retrieval strategies available:
-     - Semantic similarity matching
-     - Keyword-based filtering
-     - Hybrid approaches combining multiple methods
-   - Context window optimization for model input
-
-4. Response Generation
-   - LLM-based summarization and answer synthesis
-   - Source attribution and confidence scoring
-   - Response quality filters
+3. Content Extraction
+   - HTML content processing
+   - Main content identification
+   - Noise filtering (ads, navigation, etc.)
+   - Text cleaning and formatting
 
 ## Optimizations
 
 ### Performance Enhancements
-- Multiprocessing for parallel search and processing
+- Multiprocessing for parallel content extraction
 - Network request batching and retry mechanisms
-- Efficient context window management
-- Caching layer for frequently accessed data
+- Efficient HTML processing
+- Request caching capabilities
 
 ### Resource Management
 - Configurable batch sizes for processing
 - Memory-efficient data structures
-- Stream processing for large result sets
+- Stream processing for large results
 
 ## Installation
 
@@ -84,33 +75,37 @@ Create a config.json file:
 from ennchan_search import search
 
 config = "path/to/config.json"
-query = "Ennchan"
-answers = ask(query, config)
+query = "your search query"
+results = search(query, config)
 ```
 
-### Advanced Configuration
-- Model selection and parameters
-- Search engine preferences
-- Retrieval strategy customization
-- Response format options
+### Advanced Usage
+```python
+from ennchan_search.core.model import BraveSearchEngine
+
+# Initialize with custom configuration
+engine = BraveSearchEngine(config)
+
+# Perform search
+results = engine.search("your query")
+
+# Extract content from a specific URL
+content = engine.extract_content("https://example.com")
+```
 
 ## Interfaces
 
-### Current
-- Command Line Interface (CLI)
-
-### Planned
-- Web API (Coming Soon)
-  - RESTful endpoints
-  - WebSocket support for streaming responses
-  - API documentation
+### Core Components
+- SearchEngine: Base interface for search implementations
+- ResultExtractor: Interface for content extraction
+- BraveSearchEngine: Implementation of Brave search
+- WebResultExtractor: Web content extraction implementation
 
 ## Future Development
 - Additional search engine integrations
-- Enhanced retrieval strategies
-- Web interface
-- Model fine-tuning capabilities
+- Enhanced content extraction strategies
 - Improved caching mechanisms
+- Additional result filtering options
 
 ## Contributing
 Contributions are welcome! Please feel free to submit pull requests or open issues for discussion.
